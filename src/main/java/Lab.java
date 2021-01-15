@@ -2,13 +2,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lab {
+    private int restartIndex =12;
+
     public List<String > generateList(){
 
         int num =0;
         List<String> originList= new ArrayList<>();
         for(int i=0;i<36;i++) {
             originList.add(""+num++);
-            if(num==12) {
+            if(num== restartIndex) {
                 num=0;
             }
         }
@@ -17,12 +19,16 @@ public class Lab {
     public List<String> delSpecifiedIndex(List<String> list){
         List<String> out=list;
         for(int i=0;i<list.size();i++){
-            if(Integer.valueOf(list.get(i))%12==1||Integer.valueOf(list.get(i))%12==11){
+            if(getModNumber(i,list) ==1||getModNumber(i,list) ==11){
                 list.remove(i);
             }
         }
         return out;
     }
+    public int getModNumber(int index,List<String> list){
+        return Integer.valueOf(list.get(index))% restartIndex;
+    }
+
     public List<String> checkSpecificNumber(List<String> list){
         List<String> output=new ArrayList<>();
         for(int i=0;i<list.size();i++){
